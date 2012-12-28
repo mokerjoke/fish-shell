@@ -2071,6 +2071,8 @@ int parser_t::parse_job(process_t *p,
                     }
                 }
 
+// Disabled pending discussion in https://github.com/fish-shell/fish-shell/issues/367
+#f 0
                 if (! has_command && ! use_implicit_cd)
                 {
                     if (fish_openSUSE_dbus_hack_hack_hack_hack(&args))
@@ -2079,20 +2081,8 @@ int parser_t::parse_job(process_t *p,
                         p->type = INTERNAL_BUILTIN;
                     }
                 }
-
-#if 0
-                FILE *fp = fopen("/home/peter/mylog.txt", "a");
-                if (fp)
-                {
-                    for (size_t i=0; i < args.size(); i++)
-                    {
-                        std::string tmp = wcs2string(args.at(i).completion.c_str());
-                        fprintf(fp, "(arg %lu: %s)\n", i, tmp.c_str());
-                    }
-                    fclose(fp);
-                }
-                sleep(1);
 #endif
+
 
                 /* Check if the specified command exists */
                 if (! has_command && ! use_implicit_cd)

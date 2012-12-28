@@ -1845,7 +1845,6 @@ bool fish_xdm_login_hack_hack_hack_hack(std::vector<std::string> *cmds, int argc
 
 bool fish_openSUSE_dbus_hack_hack_hack_hack(std::vector<completion_t> *args)
 {
-    return 0;
     static signed char isSUSE = -1;
     if (isSUSE == 0)
         return false;
