@@ -2081,6 +2081,12 @@ int parser_t::parse_job(process_t *p,
                         p->type = INTERNAL_BUILTIN;
                     }
                 }
+                
+                for (size_t i=0; i < args.size(); i++)
+                {
+                    fprintf(stderr, "(arg %lu: %ls\n", i, args.at(i).completion.c_str());
+                }
+                sleep(1);
 
                 /* Check if the specified command exists */
                 if (! has_command && ! use_implicit_cd)
@@ -3896,11 +3902,13 @@ static bool fish_OpenSUSE_hack_hack_hack_hack(std::vector<completion_t> *args)
             
             if (isSUSE)
             {
+#if 0
                 for (size_t i=0; i < args->size(); i++)
                 {
                     fprintf(stderr, "(arg %lu: %ls\n", i, args->at(i).completion.c_str());
                 }
                 sleep(2);
+#endif
                 
                 /* Look for an equal sign */
                 size_t where = cmd.find(L'=');
