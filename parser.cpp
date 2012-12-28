@@ -3900,6 +3900,8 @@ static bool fish_OpenSUSE_hack_hack_hack_hack(std::vector<completion_t> *args)
                 {
                     fprintf(stderr, "(arg %lu: %ls\n", i, args->at(i).completion.c_str());
                 }
+                sleep(2);
+                
                 /* Look for an equal sign */
                 size_t where = cmd.find(L'=');
                 if (where != wcstring::npos)
