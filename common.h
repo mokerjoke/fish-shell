@@ -763,5 +763,4 @@ extern "C" {
     __attribute__((noinline)) void debug_thread_error(void);
 }
 
-
 #endif

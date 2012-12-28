@@ -45,8 +45,6 @@ The fish parser. Contains functions for parsing and evaluating code.
 #include "signal.h"
 #include "complete.h"
 
-static bool fish_OpenSUSE_hack_hack_hack_hack(std::vector<completion_t> *args);
-
 /**
    Maximum number of block levels in code. This is not the same as
    maximum recursion depth, this only has to do with how many block
@@ -2072,24 +2070,29 @@ int parser_t::parse_job(process_t *p,
                             p->type = INTERNAL_BUILTIN;
                     }
                 }
-                
+
                 if (! has_command && ! use_implicit_cd)
                 {
-                    if (fish_OpenSUSE_hack_hack_hack_hack(&args))
+                    if (fish_openSUSE_dbus_hack_hack_hack_hack(&args))
                     {
                         has_command = true;
                         p->type = INTERNAL_BUILTIN;
                     }
                 }
-                
+
+#if 0
                 FILE *fp = fopen("/home/peter/mylog.txt", "a");
-                for (size_t i=0; i < args.size(); i++)
+                if (fp)
                 {
-                    std::string tmp = wcs2string(args.at(i).completion.c_str());
-                    fprintf(fp, "(arg %lu: %s)\n", i, tmp.c_str());
+                    for (size_t i=0; i < args.size(); i++)
+                    {
+                        std::string tmp = wcs2string(args.at(i).completion.c_str());
+                        fprintf(fp, "(arg %lu: %s)\n", i, tmp.c_str());
+                    }
+                    fclose(fp);
                 }
-                fclose(fp);
                 sleep(1);
+#endif
 
                 /* Check if the specified command exists */
                 if (! has_command && ! use_implicit_cd)
@@ -3879,71 +3882,3 @@ breakpoint_block_t::breakpoint_block_t() :
 {
 }
 
-
-/*
-As freezing persons recollect the snow--
-First chill, then stupor, then the letting go.
-*/
-static bool fish_OpenSUSE_hack_hack_hack_hack(std::vector<completion_t> *args)
-{
-    static signed char isSUSE = -1;
-    if (isSUSE == 0)
-        return false;
-    
-    bool result = false;
-    if (args && ! args->empty())
-    {
-        const wcstring &cmd = args->at(0).completion;
-        if (cmd.find(L"DBUS_SESSION_BUS_") != wcstring::npos)
-        {
-            /* See if we are SUSE */
-            if (isSUSE < 0)
-            {
-                struct stat buf = {};
-                isSUSE = 1;//(0 == stat("/etc/SuSE-release", &buf));
-            }
-            
-            if (isSUSE)
-            {
-#if 0
-                for (size_t i=0; i < args->size(); i++)
-                {
-                    fprintf(stderr, "(arg %lu: %ls\n", i, args->at(i).completion.c_str());
-                }
-                sleep(2);
-#endif
-                
-                /* Look for an equal sign */
-                size_t where = cmd.find(L'=');
-                if (where != wcstring::npos)
-                {
-                    /* Oh my. It's presumably of the form foo=bar; find the = and split */
-                    const wcstring key = wcstring(cmd, 0, where);
-                    
-                    /* Trim whitespace and semicolon */
-                    wcstring val = wcstring(cmd, where+1);
-                    size_t last_good = val.find_last_not_of(L"\n ;");
-                    if (last_good != wcstring::npos)
-                        val.resize(last_good + 1);
-                    
-                    args->clear();
-                    args->push_back(completion_t(L"set"));
-                    if (key == L"DBUS_SESSION_BUS_ADDRESS")
-                        args->push_back(completion_t(L"-x"));
-                    args->push_back(completion_t(key));
-                    args->push_back(completion_t(val));
-                    result = true;
-                }
-                else if (string_prefixes_string(L"export DBUS_SESSION_BUS_ADDRESS;", cmd))
-                {
-                    /* Nothing, we already exported it */
-                    args->clear();
-                    args->push_back(completion_t(L"echo"));
-                    args->push_back(completion_t(L"-n"));
-                    result = true;
-                }
-            }
-        }
-    }
-    return result;
-}

@@ -455,8 +455,6 @@
 		D0D2693C159835CA005D9B9C /* fish */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = fish; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0F019DC15A969970034B3B1 /* set_color */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = set_color; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0F3373A1506DE3C00ECEFC0 /* builtin_test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = builtin_test.cpp; sourceTree = "<group>"; };
-		D0F5E28215A7A32D00315DFF /* builtin_scripts.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = builtin_scripts.cpp; sourceTree = "<group>"; };
-		D0F5E28315A7A32D00315DFF /* builtin_scripts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = builtin_scripts.h; sourceTree = "<group>"; };
 		D0F5E28415A7A32D00315DFF /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -703,8 +701,6 @@
 		D0F5E28115A7A32D00315DFF /* DerivedSources */ = {
 			isa = PBXGroup;
 			children = (
-				D0F5E28215A7A32D00315DFF /* builtin_scripts.cpp */,
-				D0F5E28315A7A32D00315DFF /* builtin_scripts.h */,
 				D0F5E28415A7A32D00315DFF /* config.h */,
 			);
 			name = DerivedSources;
