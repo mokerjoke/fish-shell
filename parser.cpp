@@ -2071,8 +2071,8 @@ int parser_t::parse_job(process_t *p,
                     }
                 }
 
-// Disabled pending discussion in https://github.com/fish-shell/fish-shell/issues/367
-#f 0
+                // Disabled pending discussion in https://github.com/fish-shell/fish-shell/issues/367
+                #if 0
                 if (! has_command && ! use_implicit_cd)
                 {
                     if (fish_openSUSE_dbus_hack_hack_hack_hack(&args))
@@ -2081,7 +2081,7 @@ int parser_t::parse_job(process_t *p,
                         p->type = INTERNAL_BUILTIN;
                     }
                 }
-#endif
+                #endif
 
 
                 /* Check if the specified command exists */
