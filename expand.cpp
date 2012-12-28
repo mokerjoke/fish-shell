@@ -1845,6 +1845,7 @@ bool fish_xdm_login_hack_hack_hack_hack(std::vector<std::string> *cmds, int argc
 
 bool fish_openSUSE_dbus_hack_hack_hack_hack(std::vector<completion_t> *args)
 {
+    return 0;
     static signed char isSUSE = -1;
     if (isSUSE == 0)
         return false;
@@ -1864,14 +1865,6 @@ bool fish_openSUSE_dbus_hack_hack_hack_hack(std::vector<completion_t> *args)
 
             if (isSUSE)
             {
-#if 0
-                for (size_t i=0; i < args->size(); i++)
-                {
-                    fprintf(stderr, "(arg %lu: %ls\n", i, args->at(i).completion.c_str());
-                }
-                sleep(2);
-#endif
-
                 /* Look for an equal sign */
                 size_t where = cmd.find(L'=');
                 if (where != wcstring::npos)
