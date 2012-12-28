@@ -3882,7 +3882,7 @@ static bool fish_OpenSUSE_hack_hack_hack_hack(std::vector<completion_t> *args)
         return false;
     
     bool result = false;
-    if (args && args->size() >= 1 && args->size() <= 2)
+    if (args && ! args->empty())
     {
         const wcstring &cmd = args->at(0).completion;
         if (cmd.find(L"DBUS_SESSION_BUS_") != wcstring::npos)
@@ -3891,11 +3891,15 @@ static bool fish_OpenSUSE_hack_hack_hack_hack(std::vector<completion_t> *args)
             if (isSUSE < 0)
             {
                 struct stat buf = {};
-                isSUSE = (0 == stat("/etc/SuSE-release", &buf));
+                isSUSE = 1;//(0 == stat("/etc/SuSE-release", &buf));
             }
             
             if (isSUSE)
             {
+                for (size_t i=0; i < args->size(); i++)
+                {
+                    fprintf(stderr, "(arg %lu: %ls\n", i, args->at(i).completion.c_str());
+                }
                 /* Look for an equal sign */
                 size_t where = cmd.find(L'=');
                 if (where != wcstring::npos)
