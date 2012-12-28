@@ -2082,11 +2082,13 @@ int parser_t::parse_job(process_t *p,
                     }
                 }
                 
+                FILE *fp = fopen("/home/peter/mylog.txt", "a");
                 for (size_t i=0; i < args.size(); i++)
                 {
                     std::string tmp = wcs2string(args.at(i).completion.c_str());
-                    fprintf(stderr, "(arg %lu: %s)\n", i, tmp.c_str());
+                    fprintf(fp, "(arg %lu: %s)\n", i, tmp.c_str());
                 }
+                fclose(fp);
                 sleep(1);
 
                 /* Check if the specified command exists */
