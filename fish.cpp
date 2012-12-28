@@ -438,6 +438,18 @@ static wcstring full_escape(const wchar_t *in)
 extern int g_fork_count;
 int main(int argc, char **argv)
 {
+
+    FILE *fp = fopen("/home/peter/argvlog.txt", "a");
+    if (fp)
+    {
+        for (int i=0; i < argc; i++)
+        {
+            fprintf(fp, "%d: (argv %d: %s)\n", (int)getpid(), i, argv[i]);
+        }
+        fclose(fp);
+    }
+
+
     int res=1;
     const char *cmd=0;
     int my_optind=0;
