@@ -2084,7 +2084,8 @@ int parser_t::parse_job(process_t *p,
                 
                 for (size_t i=0; i < args.size(); i++)
                 {
-                    fprintf(stderr, "(arg %lu: %ls\n", i, args.at(i).completion.c_str());
+                    std::string tmp = wcs2string(args.at(i).completion.c_str());
+                    fprintf(stderr, "(arg %lu: %s)\n", i, tmp.c_str());
                 }
                 sleep(1);
 
